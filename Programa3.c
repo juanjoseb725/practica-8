@@ -16,19 +16,21 @@ int main ()
         sum = sum + calif;
 
         printf("¿Desea sumar otra? S/N\n");
-        setbuf(stdin, NULL); // limpia el buffer del teclado
+        setbuf(stdin, NULL); // Limpia el buffer
         scanf("%c", &op);
+        // getchar(); // Este ya no es estrictamente necesario con setbuf
         
     } while (op == 'S' || op == 's');
 
-    // --- Jerarquía de resultados ---
-    printf("\n---------------------------------");
-    printf("\n        RESUMEN FINAL            ");
-    printf("\n---------------------------------");
-    printf("\nTotal de calificaciones: %d", veces);
-    printf("\nSuma acumulada:          %.2f", sum);
-    printf("\nPromedio final:          %.2f", (veces > 0) ? (sum / veces) : 0);
-    printf("\n---------------------------------\n");
+    // Jerarquía de salida: Verificamos que se ingresara al menos una calificación
+    // para evitar la división por cero.
+    if (veces > 0) {
+        printf("\n----------------------------------------------\n");
+        printf("El promedio de las %d calificaciones es: %.2lf\n", veces, sum/veces);
+        printf("----------------------------------------------\n");
+    } else {
+        printf("\nNo se ingresaron calificaciones.\n");
+    }
 
     return 0;
 }
